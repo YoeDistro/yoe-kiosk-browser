@@ -5,6 +5,7 @@ import QtQuick
 import QtQuick.Controls
 import QtWebView
 import QtQuick.Layouts
+import QtQuick.VirtualKeyboard
 
 
 ApplicationWindow {
@@ -97,8 +98,10 @@ ApplicationWindow {
     WebView {
         id: webView
         url: initialUrl
-        anchors.right: settingsDrawer.left
         anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.bottom: inputPanel.top
         height: parent.height
         onLoadingChanged: function(loadRequest) {
             if (loadRequest.errorString)
@@ -111,5 +114,12 @@ ApplicationWindow {
             allowFileAccessEnabledCheckBox.checkState = settings.allowFileAccess ? Qt.Checked : Qt.Unchecked
             localContentCanAccessFileUrlsEnabledCheckBox.checkState = settings.localContentCanAccessFileUrls ? Qt.Checked : Qt.Unchecked
         }
+    }
+
+    InputPanel {
+      id: inputPanel
+      y: Qt.inputMethod.visible ? parent.height - inputPanel.height : parent.height
+      anchors.left: parent.left
+      anchors.right: parent.right
     }
 }
