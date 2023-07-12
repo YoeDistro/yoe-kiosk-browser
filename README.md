@@ -12,3 +12,10 @@ Features:
 - `cd build`
 - `cmake ../`
 - `make`
+
+## Prior Art
+
+This project uses ideas from:
+
+- [Qt webview minibrowser](https://github.com/qt/qtwebview/tree/dev/examples/webview/minibrowser)
+- [O. S. Systems qt-kiosk-browser](https://github.com/OSSystems/qt-kiosk-browser)
