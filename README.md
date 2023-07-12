@@ -17,5 +17,6 @@ Features:
 
 This project uses ideas from:
 
+- [BEC Systems Kiosk Browser](https://github.com/cbrake/kiosk-browser/tree/qt-webengine)
 - [Qt webview minibrowser](https://github.com/qt/qtwebview/tree/dev/examples/webview/minibrowser)
 - [O. S. Systems qt-kiosk-browser](https://github.com/OSSystems/qt-kiosk-browser)
