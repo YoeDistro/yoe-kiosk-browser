@@ -31,6 +31,7 @@ QUrl Utils::fromUserInput(const QString& userInput)
 
 int main(int argc, char *argv[])
 {
+    qputenv("QT_IM_MODULE", "qtvirtualkeyboard");
 //! [0]
     QtWebView::initialize();
     QGuiApplication app(argc, argv);
