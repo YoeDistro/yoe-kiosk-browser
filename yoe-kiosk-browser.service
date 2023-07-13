@@ -1,6 +1,7 @@
 [Unit]
 Description=Yoe Kiosk Browser
 After=network.target
+After=weston.service
 
 [Service]
 User=weston
