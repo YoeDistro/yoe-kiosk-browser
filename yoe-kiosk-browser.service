@@ -1,0 +1,12 @@
+[Unit]
+Description=Yoe Kiosk Browser
+After=network.target
+
+[Service]
+User=weston
+Environment=WAYLAND_DISPLAY=wayland-1
+Environment=XDG_RUNTIME_DIR=/run/user/1000/
+ExecStart=/usr/bin/yoe-kiosk-browser
+
+[Install]
+WantedBy=multi-user.target
