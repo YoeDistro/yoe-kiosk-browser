@@ -19,6 +19,7 @@ ApplicationWindow {
 
     menuBar: ToolBar {
         id: navigationBar
+        visible:false
         RowLayout {
             anchors.fill: parent
             spacing: 0
