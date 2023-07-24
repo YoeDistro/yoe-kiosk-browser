@@ -16,7 +16,9 @@ Window {
     title: webView.title
 
     Component.onCompleted: {
-        console.log("CLIFF: Component.onCompleted")
+        console.log("CLIFF: Component.onCompleted 2")
+        console.log("CLIFF: Window width: ", width)
+        console.log("CLIFF: Window height: ", height)
     }
 
     Item {
@@ -29,6 +31,9 @@ Window {
       Component.onCompleted: {
           console.log("CLIFF: wrapper rotation: ", rotation)
           console.log("CLIFF: wrapper isRotated: ", isRotated)
+          console.log("CLIFF: wrapper width: ", width)
+          console.log("CLIFF: wrapper height: ", height)
+
       }
 
 
@@ -39,7 +44,7 @@ Window {
           anchors.top: parent.top
           anchors.right: parent.right
           anchors.bottom: inputPanel.top
-          height: parent.width
+          height: parent.height
 
           //anchors.fill: parent
 
@@ -51,6 +56,8 @@ Window {
           Component.onCompleted: {
             console.log("CLIFF: webView rotation: ", wrapper.rotation)
             console.log("CLIFF: webView isRotated: ", wrapper.isRotated)
+            console.log("CLIFF: webView width: ", width)
+            console.log("CLIFF: webView height: ", height)
           }
       }
 

@@ -68,8 +68,8 @@ int main(int argc, char *argv[])
     }
     context->setContextProperty(QStringLiteral("initialX"), geometry.x());
     context->setContextProperty(QStringLiteral("initialY"), geometry.y());
-    context->setContextProperty(QStringLiteral("initialWidth"), geometry.width());
-    context->setContextProperty(QStringLiteral("initialHeight"), geometry.height());
+    context->setContextProperty(QStringLiteral("initialWidth"), 800);
+    context->setContextProperty(QStringLiteral("initialHeight"), 480);
     context->setContextProperty(QStringLiteral("initialRotation"), rotate);
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
