@@ -41,8 +41,8 @@ ApplicationWindow {
     InputPanel {
       id: inputPanel
       y: Qt.inputMethod.visible ? parent.height - inputPanel.height : parent.height
-      anchors.left: parent.left
-      anchors.right: parent.right
+      width: parent.width * +initialKeyboardScale
+      anchors.horizontalCenter: parent.horizontalCenter
     }
   }
 }

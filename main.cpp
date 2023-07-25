@@ -42,7 +42,13 @@ int main(int argc, char *argv[]) {
   if (rotate == "") {
     rotate = "0";
   }
-  qDebug() << "KIOSK_ROTATE=" << rotate;
+  qDebug() << "YOE_KIOSK_BROWSER_ROTATE=" << rotate;
+
+  QByteArray keyboardScale = qgetenv("YOE_KIOSK_BROWSER_KEYBOARD_SCALE");
+  if (keyboardScale == "") {
+    keyboardScale = "1";
+  }
+  qDebug() << "YOE_KIOSK_BROWSER_KEYBOARD_SCALE=" << keyboardScale;
 
   //! [0]
   QtWebView::initialize();
@@ -70,6 +76,8 @@ int main(int argc, char *argv[]) {
   context->setContextProperty(QStringLiteral("initialHeight"),
                               geometry.height());
   context->setContextProperty(QStringLiteral("initialRotation"), rotate);
+  context->setContextProperty(QStringLiteral("initialKeyboardScale"),
+                              keyboardScale);
 
   engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
   if (engine.rootObjects().isEmpty())
