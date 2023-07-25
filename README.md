@@ -1,10 +1,18 @@
 # Yoe Kiosk Browser
 
-Features:
+The Yoe Kiosk Browser is a Qt WebEngine (Chromium) based browser
+designed embedded kiosk (full screen, single app) applications. In this scenario, the UI for the device
+web application that displays in browser running on the device.
+
+![screenshot](screenshot.png)
+
+## Features:
 
 - designed to run fullscreen
 - no URL bar
 - embedded touchscreen virtual keyboard
+- keyboard width can be configured
+- supports 90° or 270° screen rotation
 
 ## To build
 
@@ -21,3 +29,5 @@ This project uses ideas from:
 - [Qt webview minibrowser](https://github.com/qt/qtwebview/tree/dev/examples/webview/minibrowser)
 - [O. S. Systems qt-kiosk-browser](https://github.com/OSSystems/qt-kiosk-browser)
 - [Qt Virtual Keyboard Examples](https://github.com/qt/qtvirtualkeyboard/tree/dev/examples/virtualkeyboard/basic)
+- [Qt Web Browser](https://code.qt.io/cgit/qt-apps/qtwebbrowser.git/)
+
