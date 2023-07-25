@@ -2,7 +2,7 @@
 
 The Yoe Kiosk Browser is a Qt WebEngine (Chromium) based browser
 designed for embedded kiosk (full screen, single app) applications. In this scenario, the UI for the device
-web application that displays in browser running on the device.
+is a web application that displays in a browser running on the device.
 
 ![screenshot](screenshot.png)
 
@@ -16,7 +16,7 @@ web application that displays in browser running on the device.
 
 ## To build
 
-### On development machine
+### On a development machine
 
 - install Qt dependencies
 - `mkdir build`
@@ -24,7 +24,7 @@ web application that displays in browser running on the device.
 - `cmake ../`
 - `make`
 
-### On embedded Linux Systems
+### On Embedded Linux Systems
 
 Use the Yoe Linux recipe.
 
