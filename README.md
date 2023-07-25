@@ -1,7 +1,7 @@
 # Yoe Kiosk Browser
 
 The Yoe Kiosk Browser is a Qt WebEngine (Chromium) based browser
-designed embedded kiosk (full screen, single app) applications. In this scenario, the UI for the device
+designed for embedded kiosk (full screen, single app) applications. In this scenario, the UI for the device
 web application that displays in browser running on the device.
 
 ![screenshot](screenshot.png)
