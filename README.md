@@ -28,6 +28,10 @@ is a web application that displays in a browser running on the device.
 
 Use the Yoe Linux recipe.
 
+## Settings
+
+See [yoe-kiosk-browser-env](yoe-kiosk-browser-env)
+
 ## Reference
 
 This project uses ideas from:
