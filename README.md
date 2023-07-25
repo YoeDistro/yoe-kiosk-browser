@@ -12,7 +12,7 @@ is a web application that displays in a browser running on the device.
 - no URL bar
 - embedded touchscreen virtual keyboard
 - keyboard width can be configured
-- supports 90° or 270° screen rotation
+- supports 0°, 90° or 270° screen rotation in the application. No messing around with window managers or external environments.
 
 ## To build
 
