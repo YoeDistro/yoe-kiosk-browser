@@ -1,4 +1,4 @@
-# This file should be modified and placed in /etc/defaults/yoe-kiosk-browser
+# This file should be modified and placed in /etc/default/yoe-kiosk-browser
 
 YOE_KIOSK_BROWSER_URL=@URL@
 YOE_KIOSK_BROWSER_ROTATE=@ROTATE@

@@ -9,7 +9,7 @@ Environment=LANG=en_US.UTF-8
 Environment=WAYLAND_DISPLAY=wayland-1
 Environment=XDG_RUNTIME_DIR=/run/user/1000/
 
-EnvironmentFile=/etc/defaults/yoe-kiosk-browser
+EnvironmentFile=/etc/default/yoe-kiosk-browser
 ExecStart=/usr/bin/yoe-kiosk-browser
 
 [Install]
