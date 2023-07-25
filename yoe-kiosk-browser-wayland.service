@@ -8,10 +8,8 @@ User=weston
 Environment=LANG=en_US.UTF-8
 Environment=WAYLAND_DISPLAY=wayland-1
 Environment=XDG_RUNTIME_DIR=/run/user/1000/
-Environment=YOE_KIOSK_BROWSER_URL=@URL@
-Environment=YOE_KIOSK_BROWSER_ROTATE=@ROTATE@
-Environment=YOE_KIOSK_BROWSER_KEYBOARD_SCALE=@KEYBOARD_SCALE@
 
+EnvironmentFile=/etc/defaults/yoe-kiosk-browser
 ExecStart=/usr/bin/yoe-kiosk-browser
 
 [Install]

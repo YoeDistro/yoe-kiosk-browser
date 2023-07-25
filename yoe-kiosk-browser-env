@@ -1,0 +1,6 @@
+# This file should be modified and placed in /etc/defaults/yoe-kiosk-browser
+
+YOE_KIOSK_BROWSER_URL=@URL@
+YOE_KIOSK_BROWSER_ROTATE=@ROTATE@
+YOE_KIOSK_BROWSER_KEYBOARD_SCALE=@KEYBOARD_SCALE@
+
