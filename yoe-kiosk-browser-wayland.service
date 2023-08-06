@@ -11,6 +11,7 @@ Environment=XDG_RUNTIME_DIR=/run/user/1000/
 
 EnvironmentFile=/etc/default/yoe-kiosk-browser
 ExecStart=/usr/bin/yoe-kiosk-browser
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target

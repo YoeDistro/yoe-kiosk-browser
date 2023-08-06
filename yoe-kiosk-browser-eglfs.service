@@ -10,6 +10,7 @@ Environment=QTWEBENGINE_DISABLE_SANDBOX=1
 
 EnvironmentFile=/etc/default/yoe-kiosk-browser
 ExecStart=/usr/bin/yoe-kiosk-browser
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
