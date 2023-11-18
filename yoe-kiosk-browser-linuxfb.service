@@ -1,0 +1,21 @@
+[Unit]
+Description=Yoe Kiosk Browser
+After=network.target
+
+[Service]
+Environment=LANG=en_US.UTF-8
+Environment=QT_QPA_PLATFORM=linuxfb:fb=/dev/fb4
+Environment=QT_QPA_GENERIC_PLUGINS=evdevtouch,evdevmouse,evdevkeyboard
+Environment=QT_QPA_EVDEV_KEYBOARD_PARAMETERS=grab=1
+Environment=QTWEBENGINE_DISABLE_SANDBOX=1
+Environment=QT_QPA_EGLFS_NO_LIBINPUT=1
+Environment=QT_QPA_FB_NO_LIBINPUT=1
+Environment=QT_LOGGING_RULES=qt.qpa.input=true
+Environment=QT_QPA_EVDEV_TOUCHSCREEN_PARAMETERS=/dev/input/touchscreen0
+
+EnvironmentFile=/etc/default/yoe-kiosk-browser
+ExecStart=/usr/bin/yoe-kiosk-browser
+#Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
