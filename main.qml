@@ -40,7 +40,7 @@ ApplicationWindow {
     Rectangle {
         id: failed
         anchors.fill: parent
-        visible: true
+        visible: false
 
         Text {
             text: "Error loading page"
@@ -61,6 +61,7 @@ ApplicationWindow {
         visible: false
         onLoadingChanged: function(loadRequest) {
             console.log("onLoadingChanged: loadRequest: ", loadRequest)
+            console.log("onLoadingChanged: loadRequest.status: ", loadRequest.status)
             switch (loadRequest.status) {
             case WebEngineView.LoadSucceededStatus:
                 console.log("Page loaded!")
@@ -68,12 +69,14 @@ ApplicationWindow {
                 failed.visible = false
                 webView.visible = true
                 inputPanel.visible = true
+                break
             case WebEngineView.LoadFailedStatus:
                 console.log("Page failed!")
                 loading.visible = false
                 failed.visible = true
                 webView.visible = false
                 inputPanel.visible = false
+                break
             }
         }
     }
