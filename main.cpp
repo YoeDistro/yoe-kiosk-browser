@@ -38,6 +38,9 @@ int main(int argc, char *argv[]) {
   }
   qDebug() << "YOE_KIOSK_BROWSER_URL=" << url;
 
+  QByteArray exceptionUrl = qgetenv("YOE_KIOSK_BROWSER_EXCEPTION_URL");
+  qDebug() << "YOE_KIOSK_BROWSER_EXCEPTION_URL=" << exceptionUrl;
+
   QByteArray rotate = qgetenv("YOE_KIOSK_BROWSER_ROTATE");
   if (rotate == "") {
     rotate = "0";
@@ -62,6 +65,7 @@ int main(int argc, char *argv[]) {
   QQmlContext *context = engine.rootContext();
   context->setContextProperty(QStringLiteral("utils"), new Utils(&engine));
   context->setContextProperty(QStringLiteral("initialUrl"), url);
+  context->setContextProperty(QStringLiteral("exceptionUrl"), exceptionUrl);
   QRect geometry = QGuiApplication::primaryScreen()->availableGeometry();
   if (!QGuiApplication::styleHints()->showIsFullScreen()) {
     const QSize size = geometry.size() * 4 / 5;

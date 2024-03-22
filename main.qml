@@ -51,6 +51,20 @@ ApplicationWindow {
     }
 
     WebEngineView {
+        id: webViewException
+        url: exceptionUrl
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.bottom: inputPanel.top
+        height: parent.height
+        visible: false
+        onLoadingChanged: function(loadRequest) {
+            console.log("exception onLoadingChanged: loadRequest: ", loadRequest)
+        }
+    }       
+
+    WebEngineView {
         id: webView
         url: initialUrl
         anchors.left: parent.left
@@ -60,8 +74,8 @@ ApplicationWindow {
         height: parent.height
         visible: false
         onLoadingChanged: function(loadRequest) {
-            console.log("onLoadingChanged: loadRequest: ", loadRequest)
-            console.log("onLoadingChanged: loadRequest.status: ", loadRequest.status)
+            console.log("main onLoadingChanged: loadRequest: ", loadRequest)
+            console.log("main onLoadingChanged: loadRequest.status: ", loadRequest.status)
             switch (loadRequest.status) {
             case WebEngineView.LoadSucceededStatus:
                 console.log("Page loaded!")
@@ -72,8 +86,17 @@ ApplicationWindow {
                 break
             case WebEngineView.LoadFailedStatus:
                 console.log("Page failed!")
+                console.log("webViewException.url: ", exceptionUrl)
+                console.log("webViewException.url.length: ", exceptionUrl.length)
                 loading.visible = false
-                failed.visible = true
+                if (webViewException.url && webViewException.url !== "") {
+                    console.log("Displaying exception web page")
+                    webViewException.visible = true
+                    inputPanel.visible = true
+                } else {
+                    console.log("Displaying failed page")
+                    failed.visible = true
+                }
                 webView.visible = false
                 inputPanel.visible = false
                 break
