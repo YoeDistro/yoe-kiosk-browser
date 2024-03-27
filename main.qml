@@ -70,7 +70,7 @@ ApplicationWindow {
     Timer {
         interval: +retryInterval * 1000; running: true; repeat: true
         onTriggered: {
-            if (!webView.visible) {
+            if (webView.errorLoading) {
                 webView.url = initialUrl
             }
         }
@@ -86,16 +86,25 @@ ApplicationWindow {
         height: parent.height
         visible: false
         property int loadTryCount: 0
+        property bool errorLoading: false
         onLoadingChanged: function(loadRequest) {
             switch (loadRequest.status) {
+            case WebEngineView.LoadStartedStatus:
+                errorLoading = false
+                break
+                
             case WebEngineView.LoadSucceededStatus:
+                errorLoading = false
                 loading.visible = false
                 failed.visible = false
                 webView.visible = true
                 inputPanel.visible = true
                 loadTryCount = 0
                 break
+
+            case WebEngineView.LoadStoppedStatus:
             case WebEngineView.LoadFailedStatus:
+                errorLoading = true
                 console.log("loading failure: ", loadRequest.errorString)
                 loadTryCount++
                 loading.visible = false
@@ -110,9 +119,9 @@ ApplicationWindow {
                     inputPanel.visible = true
                 } else {
                     failed.visible = true
+                    inputPanel.visible = false
                 }
                 webView.visible = false
-                inputPanel.visible = false
                 break
             }
         }
