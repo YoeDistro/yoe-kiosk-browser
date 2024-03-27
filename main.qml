@@ -60,7 +60,10 @@ ApplicationWindow {
         height: parent.height
         visible: false
         onLoadingChanged: function(loadRequest) {
-            console.log("exception onLoadingChanged: loadRequest: ", loadRequest)
+            switch (loadRequest.status) {
+            case WebEngineView.LoadFailedStatus:
+                console.log("exception page loading failure: ", loadRequest.errorString)
+            }
         }
     }       
 
@@ -84,11 +87,8 @@ ApplicationWindow {
         visible: false
         property int loadTryCount: 0
         onLoadingChanged: function(loadRequest) {
-            console.log("main onLoadingChanged: loadRequest: ", loadRequest)
-            console.log("main onLoadingChanged: loadRequest.status: ", loadRequest.status)
             switch (loadRequest.status) {
             case WebEngineView.LoadSucceededStatus:
-                console.log("Page loaded!")
                 loading.visible = false
                 failed.visible = false
                 webView.visible = true
@@ -96,6 +96,7 @@ ApplicationWindow {
                 loadTryCount = 0
                 break
             case WebEngineView.LoadFailedStatus:
+                console.log("loading failure: ", loadRequest.errorString)
                 loadTryCount++
                 loading.visible = false
                 if (webViewException.url.toString().length > 0) {
@@ -105,11 +106,9 @@ ApplicationWindow {
                         "&errorDomain=" + loadRequest.errorDomain +
                         "&status=" + loadRequest.status +
                         "&tryCount=" + loadTryCount
-                    console.log("Displaying exception web page")
                     webViewException.visible = true
                     inputPanel.visible = true
                 } else {
-                    console.log("Displaying failed page")
                     failed.visible = true
                 }
                 webView.visible = false
