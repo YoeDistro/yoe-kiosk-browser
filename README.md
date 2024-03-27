@@ -18,6 +18,10 @@ is a web application that displays in a browser running on the device.
   - error information is passed to above page as URL parameters
   - retry page at a configurable rate
 
+### Example error page
+
+![error page](error-page.png)
+
 ## To build
 
 ### On a development machine
