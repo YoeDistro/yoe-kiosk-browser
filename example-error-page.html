@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Parameters</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f4f4f4;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    #url-params {
+      font-family: monospace;
+      background-color: #e6e6e6;
+      padding: 10px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Error loading page</h1>
+    <h2>URL Parameters</h2>
+    <div id="url-params"></div>
+  </div>
+
+  <script>
+    function getUrlParams() {
+      const urlParams = new URLSearchParams(window.location.search);
+      let paramsString = '';
+      for (const [key, value] of urlParams.entries()) {
+        paramsString += `${key}: ${value}\n`;
+      }
+      return paramsString;
+    }
+
+    window.addEventListener('load', function () {
+      const urlParamsElement = document.getElementById('url-params');
+      urlParamsElement.textContent = getUrlParams();
+    });
+  </script>
+</body>
+
+</html>

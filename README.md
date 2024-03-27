@@ -13,6 +13,14 @@ is a web application that displays in a browser running on the device.
 - embedded touchscreen virtual keyboard
 - keyboard width can be configured
 - supports 0°, 90° or 270° screen rotation in the application. No messing around with window managers or external environments.
+- if page load fails
+  - display built in failure page or custom HTML page. see [example](example-error-page.html)
+  - error information is passed to above page as URL parameters
+  - retry page at a configurable rate
+
+### Example error page
+
+![error page](error-page.png)
 
 ## To build
 

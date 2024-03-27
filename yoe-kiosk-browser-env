@@ -4,3 +4,12 @@ YOE_KIOSK_BROWSER_URL=@URL@
 YOE_KIOSK_BROWSER_ROTATE=@ROTATE@
 YOE_KIOSK_BROWSER_KEYBOARD_SCALE=@KEYBOARD_SCALE@
 
+# the following is the interval at which we try
+# to reload a failed web page (seconds)
+# default is 5s if not specified.
+YOE_KIOSK_BROSER_RETRY_INTERVAL=@RETRY_INTERVAL@
+
+# the following is typically a local web page that is loaded
+# instead of the default error screen
+YOE_KIOSK_BROWSER_EXCEPTION_URL=@EXCEPTION_URL@
+
