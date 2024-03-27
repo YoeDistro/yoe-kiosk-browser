@@ -65,7 +65,7 @@ ApplicationWindow {
     }       
 
     Timer {
-        interval: 5000; running: true; repeat: true
+        interval: +retryInterval * 1000; running: true; repeat: true
         onTriggered: {
             if (!webView.visible) {
                 webView.url = initialUrl

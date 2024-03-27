@@ -53,6 +53,12 @@ int main(int argc, char *argv[]) {
   }
   qDebug() << "YOE_KIOSK_BROWSER_KEYBOARD_SCALE=" << keyboardScale;
 
+  QByteArray retryInterval = qgetenv("YOE_KIOSK_BROWSER_RETRY_INTERVAL");
+  if (retryInterval == "") {
+    retryInterval = "5";
+  }
+  qDebug() << "YOE_KIOSK_BROWSER_RETRY_INTERVAL=" << retryInterval;
+
   //! [0]
   QtWebView::initialize();
   QGuiApplication app(argc, argv);
@@ -80,6 +86,7 @@ int main(int argc, char *argv[]) {
   context->setContextProperty(QStringLiteral("initialHeight"),
                               geometry.height());
   context->setContextProperty(QStringLiteral("initialRotation"), rotate);
+  context->setContextProperty(QStringLiteral("retryInterval"), retryInterval);
   context->setContextProperty(QStringLiteral("initialKeyboardScale"),
                               keyboardScale);
 
