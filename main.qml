@@ -85,11 +85,8 @@ ApplicationWindow {
                 inputPanel.visible = true
                 break
             case WebEngineView.LoadFailedStatus:
-                console.log("Page failed!")
-                console.log("webViewException.url: ", exceptionUrl)
-                console.log("webViewException.url.length: ", exceptionUrl.length)
                 loading.visible = false
-                if (webViewException.url && webViewException.url !== "") {
+                if (webViewException.url.toString().length > 0) {
                     console.log("Displaying exception web page")
                     webViewException.visible = true
                     inputPanel.visible = true
