@@ -26,7 +26,7 @@ is a web application that displays in a browser running on the device.
 
 ### On Embedded Linux Systems
 
-Use the Yoe Linux recipe.
+Use the [Yoe Linux recipe](https://github.com/YoeDistro/yoe-distro/blob/master/sources/meta-yoe/dynamic-layers/qt6-layer/recipes-qt/kiosk-browser/yoe-kiosk-browser.bb).
 
 ## Settings
 
