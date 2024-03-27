@@ -82,6 +82,7 @@ ApplicationWindow {
         anchors.bottom: inputPanel.top
         height: parent.height
         visible: false
+        property int loadTryCount: 0
         onLoadingChanged: function(loadRequest) {
             console.log("main onLoadingChanged: loadRequest: ", loadRequest)
             console.log("main onLoadingChanged: loadRequest.status: ", loadRequest.status)
@@ -92,10 +93,18 @@ ApplicationWindow {
                 failed.visible = false
                 webView.visible = true
                 inputPanel.visible = true
+                loadTryCount = 0
                 break
             case WebEngineView.LoadFailedStatus:
+                loadTryCount++
                 loading.visible = false
                 if (webViewException.url.toString().length > 0) {
+                    webViewException.url = exceptionUrl + 
+                        "?errorString=" + loadRequest.errorString +
+                        "&errorCode=" + loadRequest.errorCode +
+                        "&errorDomain=" + loadRequest.errorDomain +
+                        "&status=" + loadRequest.status +
+                        "&tryCount=" + loadTryCount
                     console.log("Displaying exception web page")
                     webViewException.visible = true
                     inputPanel.visible = true
