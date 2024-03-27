@@ -64,6 +64,15 @@ ApplicationWindow {
         }
     }       
 
+    Timer {
+        interval: 5000; running: true; repeat: true
+        onTriggered: {
+            if (!webView.visible) {
+                webView.url = initialUrl
+            }
+        }
+    }
+
     WebEngineView {
         id: webView
         url: initialUrl
