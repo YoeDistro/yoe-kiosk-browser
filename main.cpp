@@ -12,6 +12,15 @@
 #include <QtQml/QQmlContext>
 #include <QtWebView/QtWebView>
 
+#include <QTextStream>
+#include <QLoggingCategory>
+
+#include <QWebEngineView>
+#include <QWebEngineSettings>
+
+#include <QQuickWindow>
+#include <QWindow>  // Include this for the QWindow class
+
 // Workaround: As of Qt 5.4 QtQuick does not expose QUrl::fromUserInput.
 class Utils : public QObject {
   Q_OBJECT
@@ -59,6 +68,13 @@ int main(int argc, char *argv[]) {
   }
   qDebug() << "YOE_KIOSK_BROWSER_RETRY_INTERVAL=" << retryInterval;
 
+  // Set the environment variable for the entire process
+  QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+  env.insert("QTWEBENGINE_CHROMIUM_FLAGS", "--ignore-certificate-errors");
+
+  // Apply environment to the process (manually for the application)
+  qputenv("QTWEBENGINE_CHROMIUM_FLAGS", QByteArray("--ignore-certificate-errors"));
+
   //! [0]
   QtWebView::initialize();
   QGuiApplication app(argc, argv);
@@ -74,11 +90,15 @@ int main(int argc, char *argv[]) {
   context->setContextProperty(QStringLiteral("exceptionUrl"), exceptionUrl);
   QRect geometry = QGuiApplication::primaryScreen()->availableGeometry();
   if (!QGuiApplication::styleHints()->showIsFullScreen()) {
-    const QSize size = geometry.size() * 4 / 5;
-    const QSize offset = (geometry.size() - size) / 2;
-    const QPoint pos =
-        geometry.topLeft() + QPoint(offset.width(), offset.height());
-    geometry = QRect(pos, size);
+    // const QSize size = geometry.size() * 4 / 5;
+    // const QSize offset = (geometry.size() - size) / 2;
+    // const QPoint pos =
+    //     geometry.topLeft() + QPoint(offset.width(), offset.height());
+    // geometry = QRect(pos, size);
+
+    qDebug() << "YOE_KIOSK_BROWSER showIsFullScreen = 0";
+    // Set the geometry to the full available screen size
+    geometry = QGuiApplication::primaryScreen()->availableGeometry();
   }
   context->setContextProperty(QStringLiteral("initialX"), geometry.x());
   context->setContextProperty(QStringLiteral("initialY"), geometry.y());
@@ -93,6 +113,19 @@ int main(int argc, char *argv[]) {
   engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
   if (engine.rootObjects().isEmpty())
     return -1;
+
+  // Get the main window object from the QML engine
+  QQuickWindow* quickWindow = qobject_cast<QQuickWindow*>(engine.rootObjects().first());
+
+  if (quickWindow) {
+      // Cast QQuickWindow to QWindow, and activate it
+      QWindow *window = qobject_cast<QWindow*>(quickWindow);
+      if (window) {
+          window->show();
+          window->raise();           // Bring the window to the front
+          window->requestActivate(); // Ensure the window is activated and focused
+      }
+  }
 
   return app.exec();
 }

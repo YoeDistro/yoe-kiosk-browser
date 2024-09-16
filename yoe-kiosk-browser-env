@@ -1,6 +1,10 @@
 # This file should be modified and placed in /etc/default/yoe-kiosk-browser
 
-YOE_KIOSK_BROWSER_URL=@URL@
+# use 127.0.0.1:443 instead of localhost to resolve error logs (ipv6)
+#YOE_KIOSK_BROWSER_URL=http://localhost:8118
+YOE_KIOSK_BROWSER_URL=https://127.0.0.1:443
+
+#YOE_KIOSK_BROWSER_URL=@URL@
 YOE_KIOSK_BROWSER_ROTATE=@ROTATE@
 YOE_KIOSK_BROWSER_KEYBOARD_SCALE=@KEYBOARD_SCALE@
 
@@ -14,3 +18,11 @@ YOE_KIOSK_BROWSER_RETRY_INTERVAL=@RETRY_INTERVAL@
 # If this is not set, the default error screen is shown.
 YOE_KIOSK_BROWSER_EXCEPTION_URL=@EXCEPTION_URL@
 
+QTWEBENGINE_DISABLE_SANDBOX=1
+DISPLAY=:0
+XAUTHORITY=/home/root/.Xauthority
+QT_QPA_PLATFORM=xcb
+
+#QML_IMPORT_TRACE=1
+#QT_LOGGING_RULES="*.debug=true;"
+#QT_LOGGING_RULES="qt.virtualkeyboard=true;qt.quick.focus=true"
