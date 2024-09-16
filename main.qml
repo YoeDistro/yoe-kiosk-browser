@@ -30,7 +30,7 @@ ApplicationWindow {
             visible: true
 
             Text {
-                text: "Loading ... -12-"
+                text: "Loading ..."
                 color: "blue"
                 font.pixelSize: 24
                 anchors.centerIn: parent
