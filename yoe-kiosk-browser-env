@@ -1,12 +1,17 @@
 # This file should be modified and placed in /etc/default/yoe-kiosk-browser
 
-# use 127.0.0.1:443 instead of localhost to resolve error logs (ipv6)
-#YOE_KIOSK_BROWSER_URL=http://localhost:8118
-YOE_KIOSK_BROWSER_URL=https://127.0.0.1:443
-
-#YOE_KIOSK_BROWSER_URL=@URL@
+YOE_KIOSK_BROWSER_URL=@URL@
 YOE_KIOSK_BROWSER_ROTATE=@ROTATE@
 YOE_KIOSK_BROWSER_KEYBOARD_SCALE=@KEYBOARD_SCALE@
+YOE_KIOSK_BROWSER_FULLSCREEN=@FULLSCREEN@
+
+# If you have no trouble with default dialogs, enable them here
+YOE_KIOSK_BROWSER_DEFAULT_DIALOGS=@DEFAULT_DIALOGS@
+YOE_KIOSK_BROWSER_DIALOG_COLOR=@DIALOG_COLOR@
+
+# On some touchscreens the first input of a touch event wont activate the 
+# correct focus. This quirk solves this issue.
+YOE_KIOSK_BROWSER_TOUCH_QUIRK=@TOUCH_QUIRK@
 
 # the following is the interval at which we try
 # to reload a failed web page (seconds)
@@ -18,11 +23,12 @@ YOE_KIOSK_BROWSER_RETRY_INTERVAL=@RETRY_INTERVAL@
 # If this is not set, the default error screen is shown.
 YOE_KIOSK_BROWSER_EXCEPTION_URL=@EXCEPTION_URL@
 
-QTWEBENGINE_DISABLE_SANDBOX=1
-DISPLAY=:0
-XAUTHORITY=/home/root/.Xauthority
-QT_QPA_PLATFORM=xcb
+# In case you use your own trusted https webserver on your local browser
+# you can ignore the certification errors.
+YOE_KIOSK_BROWSER_IGNORE_CERT_ERR=@IGNORE_CERT_ERR@
 
+#QT flags
+QTWEBENGINE_DISABLE_SANDBOX=@DISABLE_SANDBOX@
 #QML_IMPORT_TRACE=1
 #QT_LOGGING_RULES="*.debug=true;"
 #QT_LOGGING_RULES="qt.virtualkeyboard=true;qt.quick.focus=true"

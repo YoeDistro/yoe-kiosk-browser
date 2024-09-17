@@ -37,7 +37,7 @@ ApplicationWindow {
             }
         }
 
-        // Greyish overlay
+        // Greyish dialog overlay
         Rectangle {
             id: overlay
             anchors.fill: parent
@@ -97,7 +97,7 @@ ApplicationWindow {
             property int loadTryCount: 0
             property bool errorLoading: false
 
-            z: 0  // Ensure it's below the overlay
+            z: 0  // Ensure it's below the dialog overlay
 
             onLoadingChanged: function(loadRequest) {
                 switch (loadRequest.status) {
@@ -139,11 +139,17 @@ ApplicationWindow {
             }
 
             onJavaScriptDialogRequested: function(request) {
+                if (useDefaultDialogs == "1")
+                    return;
+
                 request.accepted = true;
                 dialogLoader.openBrowserDialog(request);
             }
 
             onAuthenticationDialogRequested: function(request) {
+                if (useDefaultDialogs == "1")
+                    return;
+
                 request.accepted = true;
                 dialogLoader.openAuthenticationDialog(request);
             }
@@ -164,16 +170,15 @@ ApplicationWindow {
         id: browserDialogComponent
 
         Item {
-            width: 300
-            height: 200
-            signal closing()  // Define a closing signal
+            width: 500
+            height: 400
+            signal closing() 
 
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
 
             property QtObject request
             
-
             cancelButton.onClicked: {
                 request.dialogReject();
                 closing();
@@ -190,16 +195,12 @@ ApplicationWindow {
             property string title: "Title"
             property alias prompt: prompt
 
-            // Rectangle as the background
             Rectangle {
-                anchors.fill: parent  // Fill the entire Item
-                color: "#FFFFFF"  // Solid background color (white)
-
-                // Border settings
-                border.color: "black"  // Border color (black)
-                border.width: 1  // Border width
-
-                radius: 5  // Optional: Rounded corners
+                anchors.fill: parent  
+                color: "#FFFFFF"  
+                border.color: "black"  
+                border.width: 1  
+                radius: 5  
             }
 
             ColumnLayout {
@@ -218,12 +219,10 @@ ApplicationWindow {
                     width: parent.width
                     height: 30
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                    color: "#D91824"
-                    // Border settings
-                    border.color: "black"  // Border color (black)
-                    border.width: 1  // Border width
-
-                    radius: 5  // Optional: Rounded corners
+                    color: dialogColor
+                    border.color: "black"  
+                    border.width: 1 
+                    radius: 5 
 
                     Text {
                         id: title
@@ -278,23 +277,16 @@ ApplicationWindow {
                     Button {
                         id: cancelButton
                         text: qsTr("Cancel")
-                        onClicked: {
-                            request.dialogReject();
-                        }
                     }
 
                     Button {
                         id: okButton
                         text: qsTr("OK")
-                        onClicked: {
-                            request.dialogAccept(prompt.text);
-                        }
                     }
                 }
             }
 
             Component.onCompleted: {
-                console.log("### JavaScriptDialogRequest: " + request.type);
                 switch (request.type) {
                 case JavaScriptDialogRequest.DialogTypeAlert:
                     cancelButton.visible = false;
@@ -318,10 +310,8 @@ ApplicationWindow {
                 }
             }
 
-            // onClosing signal handler
             onClosing: {
-                console.log("Dialog is closing");  // Log a message
-                dialogLoader.closeDialog();  // Call a function to close the dialog
+                dialogLoader.closeDialog();
                 destroy();
             }
         }
@@ -333,8 +323,8 @@ ApplicationWindow {
 
         Item {
             width: 300
-            height: 300
-            signal closing()  // Define a closing signal
+            height: 250
+            signal closing() 
 
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
@@ -347,7 +337,6 @@ ApplicationWindow {
             }
 
             loginButton.onClicked: {
-                console.log("### loginButton.onClicked: " + userName.text + "-" + password.text + "-" + request.realm + "-" + request.url);
                 request.dialogAccept(userName.text, password.text);
                 closing();
             }
@@ -357,16 +346,12 @@ ApplicationWindow {
             property alias userName: userName
             property alias password: password
 
-            // Rectangle as the background
             Rectangle {
-                anchors.fill: parent  // Fill the entire Item
-                color: "#FFFFFF"  // Solid background color (white)
-
-                // Border settings
-                border.color: "black"  // Border color (black)
-                border.width: 1  // Border width
-
-                radius: 5  // Optional: Rounded corners
+                anchors.fill: parent 
+                color: "#FFFFFF"
+                border.color: "black" 
+                border.width: 1 
+                radius: 5  
             }
 
             ColumnLayout {
@@ -385,21 +370,13 @@ ApplicationWindow {
                     width: parent.width
                     height: 30
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                    gradient: Gradient {
-                        GradientStop {
-                            position: 0
-                            color: "#25a6e2"
-                        }
-                        GradientStop {
-                            color: "#188bd0"
-                        }
-                    }
+                    color: dialogColor
 
                     Text {
                         id: textArea
                         x: 54
                         y: 5
-                        color: "#ffffff"
+                        color: "#FFFFFF"
                         text: qsTr("Restricted Area")
                         font.pointSize: 12
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -480,10 +457,8 @@ ApplicationWindow {
                 }
             }
 
-            // onClosing signal handler
             onClosing: {
-                console.log("Dialog is closing");  // Log a message
-                dialogLoader.closeDialog();  // Call a function to close the dialog
+                dialogLoader.closeDialog(); 
                 destroy();
             }
         }
@@ -493,12 +468,9 @@ ApplicationWindow {
         id: dialogLoader
         anchors.horizontalCenter: parent.horizontalCenter // Center horizontally
         y: ( parent.height * 0.3 ) // Position the dialog 30% from the top
-
         z: 2  // Ensure the dialog is above the overlay
 
         function openBrowserDialog(request) {
-            console.log("### openBrowserDialog: " + request.type);
-
             if (dialogLoader.item) {
                 dialogLoader.item.destroy();  // Destroy any previously loaded dialogs
             }
@@ -510,15 +482,12 @@ ApplicationWindow {
 
             if (dialogInstance) {
                 overlay.visible = true;
-                console.log("### Successfully created dialog instance");
             } else {
                 console.error("Failed to create BrowserDialog component");
             }
         }
 
         function openAuthenticationDialog(request) {
-            console.log("### AuthenticationDialog: " + request.type);
-
             if (dialogLoader.item) {
                 dialogLoader.item.destroy();  // Destroy any previously loaded dialogs
             }
@@ -530,7 +499,6 @@ ApplicationWindow {
 
             if (dialogInstance) {
                 overlay.visible = true;
-                console.log("### Successfully created AuthenticationDialog instance");
             } else {
                 console.error("Failed to create AuthenticationDialog component");
             }
@@ -541,7 +509,5 @@ ApplicationWindow {
             overlay.visible = false;
         }
     }
-
-    
 }
 
