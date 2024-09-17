@@ -371,6 +371,9 @@ ApplicationWindow {
                     height: 30
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                     color: dialogColor
+                    border.color: "black"  
+                    border.width: 1 
+                    radius: 5 
 
                     Text {
                         id: textArea

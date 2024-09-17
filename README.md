@@ -27,6 +27,7 @@ is a web application that displays in a browser running on the device.
 The browser utilizes custom dialogs, including login prompts, due to the limitations in Qt's default dialog handling. This approach is essential when prompt input is required via a virtual keyboard, as it ensures the keyboard remains interactable and properly targetable.
 
 ![Login](images/login.png)
+
 ![Dialog](images/dialog.png)
 
 ## To build
