@@ -3,7 +3,7 @@ project(yoe-kiosk-browser LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml Quick WebView)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml Quick WebView Widgets WebEngineWidgets WebEngineCore WebEngineQuick)
 
 qt_add_executable(yoe-kiosk-browser
     main.cpp
@@ -15,6 +15,10 @@ target_link_libraries(yoe-kiosk-browser PUBLIC
     Qt::Qml
     Qt::Quick
     Qt::WebView
+    Qt6::Widgets
+    Qt6::WebEngineWidgets
+    Qt6::WebEngineCore
+    Qt6::WebEngineQuick
 )
 
 # Resources:

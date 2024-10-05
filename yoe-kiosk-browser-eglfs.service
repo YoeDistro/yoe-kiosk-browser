@@ -8,6 +8,9 @@ Environment=QT_QPA_EGLFS_INTEGRATION=eglfs_kms
 Environment=QT_QPA_EGLFS_KMS_CONFIG=/etc/default/eglfs.json
 Environment=QTWEBENGINE_DISABLE_SANDBOX=1
 
+StandardOutput=journal
+StandardError=journal
+
 EnvironmentFile=/etc/default/yoe-kiosk-browser
 ExecStart=/usr/bin/yoe-kiosk-browser
 Restart=on-failure
