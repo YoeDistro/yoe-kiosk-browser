@@ -6,7 +6,7 @@ After=weston.service
 [Service]
 User=weston
 Environment=LANG=en_US.UTF-8
-Environment=WAYLAND_DISPLAY=wayland-1
+Environment=WAYLAND_DISPLAY=wayland-0
 Environment=XDG_RUNTIME_DIR=/run/user/1000/
 
 EnvironmentFile=/etc/default/yoe-kiosk-browser
